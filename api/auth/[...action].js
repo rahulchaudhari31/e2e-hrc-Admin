@@ -1,42 +1,52 @@
-const BACKEND_URL = process.env.BACKEND_URL || 'https://e2e-hrc-backend.onrender.com';
+const BACKEND_URL = 'https://e2e-hrc-backend.onrender.com';
+
+async function getBody(req) {
+  if (req.body) {
+    return typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+  }
+  const chunks = [];
+  for await (const chunk of req) chunks.push(chunk);
+  return Buffer.concat(chunks).toString();
+}
 
 export default async function handler(req, res) {
   const action = req.query.action ? req.query.action.join('/') : '';
   const targetUrl = `${BACKEND_URL}/auth/${action}`;
 
+  res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   try {
-    const headers = { 'Content-Type': 'application/json' };
+    const body = await getBody(req);
 
-    const fetchOptions = {
+    const backendResponse = await fetch(targetUrl, {
       method: req.method,
-      headers,
-      credentials: 'include',
-    };
+      headers: { 'Content-Type': 'application/json' },
+      body: body || undefined,
+    });
 
-    if (req.method !== 'GET' && req.method !== 'HEAD' && req.body) {
-      fetchOptions.body = JSON.stringify(req.body);
-    }
-
-    const backendResponse = await fetch(targetUrl, fetchOptions);
-    const data = await backendResponse.text();
+    const text = await backendResponse.text();
 
     res.status(backendResponse.status);
 
-    const setCookies = backendResponse.headers.getSetCookie?.() || [];
-    if (setCookies.length > 0) {
-      setCookies.forEach((cookie) => res.setHeader('Set-Cookie', cookie));
+    const setCookie = backendResponse.headers.get('set-cookie');
+    if (setCookie) {
+      res.setHeader('Set-Cookie', setCookie);
     }
 
-    const contentType = backendResponse.headers.get('content-type');
-    if (contentType && contentType.includes('application/json')) {
-      res.setHeader('Content-Type', 'application/json');
-    } else {
-      res.setHeader('Content-Type', contentType || 'application/json');
-    }
-
-    res.send(data);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(text || '{}');
   } catch (error) {
-    console.error('Auth proxy error:', error);
-    res.status(500).json({ message: 'Proxy error: Could not reach backend' });
+    console.error('Auth proxy error:', error.message);
+    res.status(502).json({ message: 'Backend unreachable' });
   }
 }
+
+export const config = { api: { bodyParser: false } };
