@@ -5,6 +5,10 @@
       "destination": "https://e2e-hrc-backend.onrender.com/api/$1"
     },
     {
+      "source": "/auth/(.*)",
+      "destination": "https://e2e-hrc-backend.onrender.com/auth/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
