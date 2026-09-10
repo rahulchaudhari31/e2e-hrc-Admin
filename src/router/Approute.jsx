@@ -7,7 +7,7 @@ import BlogsLayout from "../pages/BlogsLayout";
 import BlogServices from "../pages/BlogServices";
 import BlogManagement from "../pages/BlogManagement";
 import ContactEnquiries from "../pages/ContactEnquiries";
-import ContactUs from "../pages/ContactUs";
+import ContactUs from "../pages/contactus";
 import EmployerManagement from "../pages/employer";
 import EmployeeManagement from "../pages/EmployeeManagement";
 import BecomePartnerManagement from "../pages/becomepartner";
