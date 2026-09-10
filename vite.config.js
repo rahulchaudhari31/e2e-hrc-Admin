@@ -7,12 +7,11 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/api/auth': {
+      '/api': {
         target: 'http://localhost:3000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/auth/, '/auth'),
       },
-      '/api': {
+      '/auth': {
         target: 'http://localhost:3000',
         changeOrigin: true,
       }
