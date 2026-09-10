@@ -4,7 +4,7 @@
  */
 export const register = async (fullName, email, password, confirmPassword) => {
   try {
-    const response = await fetch('/auth/register', {
+    const response = await fetch('/api/auth/register', {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -36,7 +36,7 @@ export const register = async (fullName, email, password, confirmPassword) => {
  */
 export const login = async (email, password) => {
   try {
-    const response = await fetch('/auth/login', {
+    const response = await fetch('/api/auth/login', {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -70,7 +70,7 @@ export const login = async (email, password) => {
  */
 export const logout = async () => {
   try {
-    const response = await fetch('/auth/logout', {
+    const response = await fetch('/api/auth/logout', {
       method: 'POST',
       credentials: 'include',
       headers: {

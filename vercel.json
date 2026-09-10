@@ -1,12 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "https://e2e-hrc-backend.onrender.com/api/$1"
+      "source": "/api/auth/(.*)",
+      "destination": "/api/auth/$1"
     },
     {
-      "source": "/auth/(.*)",
-      "destination": "https://e2e-hrc-backend.onrender.com/auth/$1"
+      "source": "/api/(.*)",
+      "destination": "https://e2e-hrc-backend.onrender.com/api/$1"
     },
     {
       "source": "/(.*)",
