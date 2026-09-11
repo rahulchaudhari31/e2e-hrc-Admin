@@ -1,12 +1,8 @@
+import { handleJsonResponse } from '../authGuard';
+
 const API_BASE = '/api';
 
-const handleResponse = async (response) => {
-  const data = await response.json();
-  if (!response.ok) {
-    throw new Error(data.message || 'Request failed');
-  }
-  return data;
-};
+const handleResponse = handleJsonResponse;
 
 export const getAdminApproachCards = async () => {
   const response = await fetch(`${API_BASE}/admin/approach-cards`, { credentials: 'include' });

@@ -1,10 +1,6 @@
-const handleResponse = async (response) => {
-  const data = await response.json();
-  if (!response.ok) {
-    throw new Error(data.message || 'Location card request failed');
-  }
-  return data;
-};
+import { handleJsonResponse } from './authGuard';
+
+const handleResponse = handleJsonResponse;
 
 export const getAllLocationCardsAdmin = async () => {
   const response = await fetch('/api/admin/location-cards', {

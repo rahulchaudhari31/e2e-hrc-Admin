@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { login as apiLogin, register as apiRegister } from "../services/authService";
 import toast from "react-hot-toast";
@@ -19,6 +19,15 @@ export default function LoginPage() {
 
   const { login: contextLogin } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  // Show a single, clear message when the user was bounced back because their
+  // session expired (token no longer valid) instead of repeated 401 toasts.
+  useEffect(() => {
+    if (searchParams.get("expired") === "1") {
+      toast.error("Your session has expired. Please log in again.");
+    }
+  }, [searchParams]);
 
   // Validate email format
   const isValidEmail = (email) => {

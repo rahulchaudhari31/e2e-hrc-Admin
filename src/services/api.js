@@ -1,6 +1,12 @@
+import { handleUnauthorized } from './authGuard';
+
 // ─── Shared response handler ────────────────────────────────────────────────
 const handleResponse = async (response) => {
-  const data = await response.json();
+  const data = await response.json().catch(() => ({}));
+  if (response.status === 401) {
+    handleUnauthorized();
+    throw new Error(data.message || 'Session expired');
+  }
   if (!response.ok) {
     throw new Error(data.message || 'API request failed');
   }
