@@ -8,6 +8,8 @@ import JourneyManagement from '../components/about/JourneyManagement';
 import WhyChooseE2ESection from '../components/about/WhyChooseE2ESection';
 import MissionVisionSection from '../components/about/MissionVisionSection';
 import TestimonialsSection from '../components/about/TestimonialsSection';
+import AboutGlobalFootprintAdmin from '../components/about/AboutGlobalFootprintAdmin';
+import AboutCallToActionAdmin from '../components/about/AboutCallToActionAdmin';
 
 export default function AboutUsManagement() {
   return (
@@ -31,6 +33,8 @@ export default function AboutUsManagement() {
         <WhyChooseE2ESection />
         <MissionVisionSection />
         <TestimonialsSection />
+        <AboutGlobalFootprintAdmin />
+        <AboutCallToActionAdmin />
       </div>
     </div>
   );

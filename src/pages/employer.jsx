@@ -3,6 +3,8 @@ import EmployerHowWeWorkSection from '../components/employer/EmployerHowWeWorkSe
 import EmployerFAQSection from '../components/employer/EmployerFAQSection';
 import EmployerCTASection from '../components/employer/EmployerCTASection';
 import EmployerTestimonialsAdmin from '../components/employer/EmployerTestimonialsAdmin';
+import EmployerWhyChooseAdmin from '../components/employer/EmployerWhyChooseAdmin';
+import EmployerHowWeWorkHeaderAdmin from '../components/employer/EmployerHowWeWorkHeaderAdmin';
 
 export default function EmployerManagement() {
   return (
@@ -17,6 +19,8 @@ export default function EmployerManagement() {
       <div className="space-y-6">
         <EmployerHeroSection />
         <EmployerHowWeWorkSection />
+        <EmployerHowWeWorkHeaderAdmin />
+        <EmployerWhyChooseAdmin />
         <EmployerFAQSection />
         <EmployerCTASection />
         <EmployerTestimonialsAdmin />

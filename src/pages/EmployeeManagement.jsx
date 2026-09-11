@@ -6,6 +6,8 @@ import EmployeeWhyChooseWrapper from '../components/employee/EmployeeWhyChooseWr
 import EmployeeFAQManager from '../components/employee/EmployeeFAQManager';
 import EmployeeTestimonialManagement from '../components/employee/testimonials/EmployeeTestimonialManagement';
 import EmployeeCTAManager from '../components/employee/EmployeeCTAManager';
+import EmployeeHRCWhyChooseAdmin from '../components/employee/EmployeeHRCWhyChooseAdmin';
+import EmployeeCandidateCTAAdmin from '../components/employee/EmployeeCandidateCTAAdmin';
 
 
 export default function EmployeeManagement() {
@@ -38,6 +40,12 @@ export default function EmployeeManagement() {
 
          {/* Employee Testimonial Section */}
         <EmployeeTestimonialManagement />
+
+        {/* Employee HRC Why Choose (H/R/C rows) Section */}
+        <EmployeeHRCWhyChooseAdmin />
+
+        {/* Employee Candidate CTA Section */}
+        <EmployeeCandidateCTAAdmin />
       </div>
     </div>
   );
